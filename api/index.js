@@ -18,8 +18,6 @@ const app = express();
 app.use(express.json());
 app.use('/api/user', userRouter); // Ensure this is above app.listen
 app.use('/api/auth',authRouter);
-
-
 app.use((err, req, res, next) => {
   console.log(err);
   const statusCode = err.statusCode || 500;
