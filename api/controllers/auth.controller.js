@@ -7,12 +7,11 @@ export const signup = async (req, res, next) => {
   const hashedPassword = bcrypt.hashSync(password, 10);
   const newUser = new User({ username, email, password: hashedPassword });
    
-  console.log("fjfjffjj");
   try {
     await newUser.save();
     res.status(201).json("User created successfully");
   } catch (err) {
     // Ignore specific error checks and always return the same custom error
-    next(errorHandler(550, "Error from function"));
+    next(err);
   }
 };
