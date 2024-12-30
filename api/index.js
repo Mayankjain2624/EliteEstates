@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from './routes/user.route.js'; // Include the extension
 import authRouter from './routes/auth.route.js'
+import cors from 'cors'
 dotenv.config();
 
 mongoose
@@ -15,6 +16,11 @@ mongoose
   });
 
 const app = express();
+// const cors=require('cors');
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+}));
 app.use(express.json());
 app.use('/api/user', userRouter); // Ensure this is above app.listen
 app.use('/api/auth',authRouter);
