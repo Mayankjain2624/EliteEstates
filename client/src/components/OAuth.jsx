@@ -4,6 +4,10 @@ import { app } from '../firebase';
 import { useDispatch } from 'react-redux';
 import { signInSuccess } from '../redux/user/useSlice';
 import { useNavigate } from 'react-router-dom';
+// import { createClient } from "@supabase/supabase-js";
+
+  // const supabase = createClient("https://rvdbfvrtgwimrnrvdbeb.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ2ZGJmdnJ0Z3dpbXJucnZkYmViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU1ODkyMDIsImV4cCI6MjA1MTE2NTIwMn0.VOAXEUIvBx7R221yU-bxl8_qQJ27bY5C463thdznArI");
+
 function OAuth() {
     const dispatch=useDispatch();
     const navigate=useNavigate();
