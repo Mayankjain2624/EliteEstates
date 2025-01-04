@@ -1,155 +1,195 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  updateUserFailure,
+  updateUserSuccess,
+  updateUserStart,
+  deleteUserFailure,
+  deleteUserSuccess,
+  signOutUserFailure,
+  signOutUserSuccess,
+  signOutUserstart,
+} from "../redux/user/useSlice";
 
-import { useSelector } from 'react-redux'
-import { updateUserFailure,updateUserSuccess,updateUserStart, deleteUserFailure, deleteUserSuccess, signOutUserFailure, signOutUserSuccess, signOutUserstart } from '../redux/user/useSlice';
-import { useDispatch } from 'react-redux';
 function Profile() {
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const fileRef = useRef(null);
-  const {currentUser,loading,error} = useSelector((state) => state.user);
+  const { currentUser, loading, error } = useSelector((state) => state.user);
 
-  // const currentUser = user.currentUser;
-  console.log(currentUser);
   const [file, setFile] = useState(undefined);
   const [iloading, setIloading] = useState(false);
-  // const [hloading,setHloading]=useState(false);
-  const [updateSuccess,setUpdateSuccess]=useState(false);
+  const [updateSuccess, setUpdateSuccess] = useState(false);
   const [image, setImage] = useState(null);
-  const [formData,setFormData]=useState({});
+  const [formData, setFormData] = useState({});
+
   useEffect(() => {
     if (file) {
       setIloading(true);
       handleFileUpload(file);
     }
-  }, [file])
+  }, [file]);
+
   const handleFileUpload = async (file) => {
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "first_try");
     data.append("cloud_name", "dj3ws7non");
-    const res = await fetch("https://api.cloudinary.com/v1_1/dj3ws7non/image/upload", {
-      method: "POST",
-      body: data
-    })
-    const uploadedimage = await res.json();
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dj3ws7non/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const uploadedImage = await res.json();
     setIloading(false);
-    setImage(uploadedimage.url);
-    setFormData({...formData , avatar: uploadedimage.url});
-    // console.log(uploadedimage.url);
-    
-  }
-  const handleChange=(e)=>{
+    setImage(uploadedImage.url);
+    setFormData({ ...formData, avatar: uploadedImage.url });
+  };
+
+  const handleChange = (e) => {
     setFormData({
       ...formData,
-       [e.target.id] : e.target.value,
+      [e.target.id]: e.target.value,
     });
-  }
+  };
 
-  console.log("formdata",formData);
-  const handleSubmit=async (e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
+    try {
       dispatch(updateUserStart());
-      // setHloading(true);
-      const res=await fetch(`/api/user/update/${currentUser._id}`,{
-        method:'POST',
+      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body : JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
-      const data= await res.json();
-      if(data.success===false){
+      const data = await res.json();
+      if (data.success === false) {
         dispatch(updateUserFailure(data.message));
         return;
       }
-    dispatch(updateUserSuccess(data));
-     setUpdateSuccess(true);
-    // setHloading(false);
-    }catch(err){
+      dispatch(updateUserSuccess(data));
+      setUpdateSuccess(true);
+    } catch (err) {
       dispatch(updateUserFailure(err.message));
-      // setHloading(false);
     }
+  };
 
-  }
-  const handleDeleteUser=async()=>{
-    try{
-      dispatch(signOutUserstart())
-      const res= await fetch(`/api/user/delete/${currentUser._id}`,{
-        method : 'DELETE',
-        headers : {
-          'Content-Type' : 'application/json',
+  const handleDeleteUser = async () => {
+    try {
+      dispatch(signOutUserstart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
         },
       });
-    const data=await res.json();
-   if(data.success===false)
-   {
-    dispatch(deleteUserFailure(data.message))
-    return ;
-   }
-   dispatch(deleteUserSuccess(data));
-    }catch(err){
-      dispatch(deleteUserFailure(err.message))
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (err) {
+      dispatch(deleteUserFailure(err.message));
     }
-  }
-  const handleSignOut=async ()=>{
-   try{
-    dispatch(signOutUserstart())
-     const res=await fetch('/api/auth/signout');
-     const data=await res.json();
-     if(data.success===false)
-     {
-      dispatch(signOutUserFailure(data.message));
-      return;
-     }
-     dispatch(signOutUserSuccess(data));
-   }catch(err){
-      dispatch(signOutUserFailure(err.message));
-   }
-  }
-  return (
-    <div className='p-3 max-w-lg mx-auto'>
-      <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
-      <form action="" className='flex flex-col' onSubmit={handleSubmit}>
-        <input onChange={(e) => setFile(e.target.files[0])}
-          type="file"
-          name=""
-          id=""
-          ref={fileRef} hidden accept='image/*' />
-        <img onClick={() => fileRef.current.click()} className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2 p-1' src={image || currentUser.avatar} alt="profile" />
-        <input className='boreder p-3 rounded-lg'
-          type="text"
-          placeholder="username"
-          defaultValue={currentUser.username}
-          id='username'
+  };
 
+  const handleSignOut = async () => {
+    try {
+      dispatch(signOutUserstart());
+      const res = await fetch("/api/auth/signout");
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(signOutUserFailure(data.message));
+        return;
+      }
+      dispatch(signOutUserSuccess(data));
+    } catch (err) {
+      dispatch(signOutUserFailure(err.message));
+    }
+  };
+
+  return (
+    <div className="p-6 max-w-md mx-auto bg-white shadow-lg rounded-xl border border-gray-200">
+      <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
+        Profile
+      </h1>
+      <form className="flex flex-col space-y-6" onSubmit={handleSubmit}>
+        <div className="flex flex-col items-center">
+          <input
+            onChange={(e) => setFile(e.target.files[0])}
+            type="file"
+            ref={fileRef}
+            hidden
+            accept="image/*"
+          />
+          <img
+            onClick={() => fileRef.current.click()}
+            className="rounded-full h-28 w-28 object-cover cursor-pointer border-2 border-gray-300 shadow-md hover:shadow-lg transition duration-200"
+            src={image || currentUser.avatar}
+            alt="profile"
+          />
+          {iloading && (
+            <p className="text-sm text-blue-500 mt-3">Uploading...</p>
+          )}
+        </div>
+
+        <input
+          className="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
+          type="text"
+          placeholder="Username"
+          defaultValue={currentUser.username}
+          id="username"
           onChange={handleChange}
         />
-        <input className='boreder p-3 rounded-lg'
+        <input
+          className="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
           type="email"
-          placeholder='email'
-          id='email'
+          placeholder="Email"
+          id="email"
           defaultValue={currentUser.email}
           onChange={handleChange}
         />
-        <input className='boreder p-3 rounded-lg'
+        <input
+          className="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
           type="password"
-          placeholder='password '
-          id='password'
+          placeholder="Password"
+          id="password"
           onChange={handleChange}
         />
-        <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'>{loading ? "Updating..." : "Update"}</button>
+        <button
+          disabled={loading}
+          className="bg-blue-600 text-white rounded-md py-2 uppercase hover:bg-blue-700 disabled:bg-blue-400 transition duration-200"
+        >
+          {loading ? "Updating..." : "Update"}
+        </button>
       </form>
-      <div className='flex justify-between mt-5 p-1'>
-        <span onClick={handleDeleteUser} className='text-red-700 cursor-pointer'>Delete Account</span>
-        <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>Sign Out</span>
-        {/* <p>{loading}</p> */}
+
+      {updateSuccess && (
+        <p className="mt-4 text-center text-green-600">
+          User updated successfully!
+        </p>
+      )}
+
+      <div className="flex justify-between mt-6 text-sm text-gray-700">
+        <span
+          onClick={handleDeleteUser}
+          className="text-red-600 cursor-pointer hover:underline hover:text-red-700 transition duration-200"
+        >
+          Delete Account
+        </span>
+        <span
+          onClick={handleSignOut}
+          className="text-red-600 cursor-pointer hover:underline hover:text-red-700 transition duration-200"
+        >
+          Sign Out
+        </span>
       </div>
-      <span className='text-center'>{(!iloading && !image) ? null : iloading && !image ? <p>Uploading... </p> : <p className='text-green-600'>sucessfully uploaded</p>}</span>
-       {updateSuccess?<span className='text-center text-green-600'>user is successfully updated</span>
-       :''}
-      </div>
-  )
+    </div>
+  );
 }
 
-export default Profile
+export default Profile;
