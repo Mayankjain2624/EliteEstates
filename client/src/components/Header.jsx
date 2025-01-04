@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { shallowEqual } from 'react-redux';
 
 function Header() {
-  const { user: currentUser } = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
   console.log('CurrentUser in Header:', currentUser);
   return (
     <header className='bg-slate-200 shadow-md'>
@@ -36,7 +36,7 @@ function Header() {
           </Link>
           <Link to="/profile">
             {
-              currentUser.currentUser ? (<img className='rounded-full h-7 w-7 object-cover' src={currentUser.currentUser.avatar} alt="" />) : <li className=' text-slate-700 hover:underline'>sign in</li>
+              currentUser ? (<img className='rounded-full h-7 w-7 object-cover' src={currentUser.avatar} alt="" />) : <li className=' text-slate-700 hover:underline'>sign in</li>
             }</Link>
         </ul>
       </div>
