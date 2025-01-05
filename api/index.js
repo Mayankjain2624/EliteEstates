@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from './routes/user.route.js'; // Include the extension
 import authRouter from './routes/auth.route.js'
+import lisingRouter from './routes/listing.route.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
 dotenv.config();
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/api/user', userRouter); // Ensure this is above app.listen
 app.use('/api/auth',authRouter);
+app.use('/api/listing',lisingRouter );
 app.use((err, req, res, next) => {
   console.log(err);
   const statusCode = err.statusCode || 500;
