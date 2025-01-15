@@ -7,7 +7,6 @@ import {
   signInFailure,
 } from '../redux/user/useSlice';
 import OAuth from '../components/OAuth';
-
 export default function SignIn() {
   const [formData, setFormData] = useState({});
   const { loading, error } = useSelector((state) => state.user);

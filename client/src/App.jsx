@@ -21,7 +21,6 @@ function App() {
           <Route element={<PrivateRoute/>}>
         <Route path="/profile" element={<Profile />} />
         <Route path="/createlisting" element={<Createlisting />} />
-
           </Route>
       </Routes>
     </BrowserRouter>
