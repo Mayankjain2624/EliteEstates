@@ -14,12 +14,11 @@ function Header() {
         <h1 className="font-bold text-lg sm:text-2xl">
           <Link to="/" className="flex items-center">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-600 to-slate-900">
-              mayank
+              Mayank
             </span>
-            <span className="text-slate-700">estate</span>
+            <span className="text-slate-700">Estate</span>
           </Link>
         </h1>
-
         {/* Search Bar */}
         <form
           action=""
@@ -43,6 +42,11 @@ function Header() {
           <Link to="/about">
             <li className="hidden sm:block text-gray-700 font-medium hover:text-blue-500 transition duration-200">
               About
+            </li>
+          </Link>
+          <Link to="/mylisting">
+            <li className="hidden sm:block text-gray-700 font-medium hover:text-blue-500 transition duration-200">
+              My Listing
             </li>
           </Link>
           <Link to="/profile">

@@ -15,7 +15,6 @@ function Profile() {
   const dispatch = useDispatch();
   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
-
   const [file, setFile] = useState(undefined);
   const [iloading, setIloading] = useState(false);
   const [updateSuccess, setUpdateSuccess] = useState(false);
