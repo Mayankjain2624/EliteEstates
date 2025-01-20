@@ -44,13 +44,6 @@ function Mylisting() {
         console.log(error.message);
       }
     };
-    // const editlisting = (listingId) => {
-    //   try{
-    //     const res=fetch(`/api/listing/edit/${listingId}`,{method:'GET'});
-    //   }catch(err){ 
-    //     console.log(err);
-    //   }
-    // }
   return (
     <div className="flex flex-wrap justify-center items-center">
 
