@@ -44,6 +44,20 @@ function Mylisting() {
         console.log(error.message);
       }
     };
+    const editlisting = async (listingId) => {
+      try{
+        const res=await fetch(`/api/listing/update/${listingId}`,
+          {
+          method:'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify()
+        });
+        const data=await res.json();
+        console.log(data);
+      }catch(err){
+        console.log(err);
+      }
+    }
   return (
     <div className="flex flex-wrap justify-center items-center">
 
