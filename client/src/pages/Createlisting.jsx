@@ -28,7 +28,7 @@ function Createlisting() {
     const [loading, setLoading] = useState(false);
     const [listing,setListing]=useState({});
     console.log(listing);
-    const handleImageSubmit = (e) => {
+    const handleImageSubmit = () => {
         if (files.length === 0) {
             setimageuploaderror('Please select at least one image to upload.');
             return;
