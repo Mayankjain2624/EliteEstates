@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 function Mylisting() {
   const { currentUser } = useSelector((state) => state.user);
   const [Listings, setListings] = useState([]);
+  const navigate=useNavigate();
   const showlisting = async () => {
     try {
       const res = await fetch(`/api/user/listings/${currentUser._id}`,
@@ -37,7 +38,7 @@ function Mylisting() {
           console.log(data.message);
           return;
         }
-  
+
         setListings((prev) =>
           prev.filter((listing) => listing._id !== listingId)
         );
@@ -63,13 +64,13 @@ function Mylisting() {
     <div className="flex flex-wrap justify-center items-center">
 
       {Listings.map(listing => (
-          <div key={listing._id} className="max-w-sm bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden m-4 hover:shadow-xl transition-shadow duration-300">
+          <div key={listing._id} className="max-w-sm bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden m-4 hover:shadow-xl transition-shadow duration-300"  >
             <img 
               src={listing.imageUrls[0] || 'https://via.placeholder.com/400'} 
               alt={listing.name} 
               className="w-full h-48 object-cover"
             />
-            <div className="p-6">
+            <div className="p-6" >
               <h1 className="text-xl font-semibold text-gray-800 mb-3">{listing.name}</h1>
               <p className="text-gray-600 mb-4 text-sm line-clamp-3">{listing.description}</p>
               <div className="mb-4">
@@ -93,6 +94,12 @@ function Mylisting() {
                   onClick={()=>deleteListing(listing._id)}
                 >
                   Delete
+                </button>
+                <button 
+                  className="flex-1 py-2 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75"
+                  onClick={() => navigate(`/listing/${listing._id}`)}
+                >
+                  Details
                 </button>
               </div>
             </div>

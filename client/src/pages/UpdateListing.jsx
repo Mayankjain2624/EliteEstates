@@ -1,5 +1,4 @@
 
-import { use } from 'react';
 import { useState,useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate,useParams } from 'react-router-dom';
@@ -146,7 +145,7 @@ function UpdateListing() {
             setListing(data);
             
             setLoading(false);
-            navigate(`/mylisting`);
+            navigate(`/listing/${listingId}`);
             if (data.success === false) {
                 setError(data.message);
                 return;
