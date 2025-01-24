@@ -6,6 +6,7 @@ import authRouter from './routes/auth.route.js'
 import lisingRouter from './routes/listing.route.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
+import path from 'path';
 dotenv.config();
 
 mongoose
@@ -16,7 +17,7 @@ mongoose
   .catch((err) => {
     console.error("Error connecting to MongoDB:", err);
   });
-
+const __dirname = path.resolve();
 const app = express();
 // const cors=require('cors');
 app.use(cors({
@@ -28,6 +29,10 @@ app.use(cookieParser());
 app.use('/api/user', userRouter); // Ensure this is above app.listen
 app.use('/api/auth',authRouter);
 app.use('/api/listing',lisingRouter );
+app.use(express.static(path.join(__dirname, '/client/dist')));
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '/client','dist','index.html'))
+);
 app.use((err, req, res, next) => {
   console.log(err);
   const statusCode = err.statusCode || 500;
