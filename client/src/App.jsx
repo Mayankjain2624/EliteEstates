@@ -11,6 +11,7 @@ import Createlisting from './pages/Createlisting';
 import Mylisting from './pages/Mylisting';
 import UpdateListing from './pages/UpdateListing';
 import Listing from './pages/Listing';
+import Search from './pages/Search';
 function App() {
   return (
     <BrowserRouter>
@@ -21,7 +22,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<About />} />
         <Route path="/listing/:id" element={<Listing />} />
-
+        <Route path="/search" element={<Search/>} />
+      
           <Route element={<PrivateRoute/>}>
         <Route path="/profile" element={<Profile />} />
         <Route path="/createlisting" element={<Createlisting />} />
