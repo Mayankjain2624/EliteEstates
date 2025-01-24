@@ -1,11 +1,29 @@
-import React from "react";
-import { FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate, useLocation,Link } from 'react-router-dom';
 
+import { FaSearch } from "react-icons/fa";
 function Header() {
   const { currentUser } = useSelector((state) => state.user);
-  console.log("CurrentUser in Header:", currentUser);
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('searchTerm', searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get('searchTerm');
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl); // Fixed: was using searchTerm instead of searchTermFromUrl
+    }
+  }, [location.search]);
 
   return (
     <header className="bg-white shadow-lg">
@@ -21,13 +39,16 @@ function Header() {
         </h1>
         {/* Search Bar */}
         <form
+        onSubmit={handleSubmit}
           action=""
           className="flex items-center bg-gray-100 rounded-full shadow-sm px-4 py-2"
         >
           <input
             type="text"
             placeholder="Search..."
+            value={searchTerm}
             className="bg-transparent focus:outline-none w-32 sm:w-64 text-sm text-gray-700"
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
           <FaSearch className="text-gray-500 ml-2" />
         </form>
