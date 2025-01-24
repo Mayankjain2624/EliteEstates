@@ -1,9 +1,11 @@
 
-import { useState} from 'react';
+import { use } from 'react';
+import { useState,useEffect} from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 
-function Createlisting() {
+
+function UpdateListing() {
     const navigate=useNavigate();
     const [files, setFiles] = useState([]);
     const [formData, setFormData] = useState({
@@ -27,7 +29,28 @@ function Createlisting() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const [listing,setListing]=useState({});
+    const params=useParams();
     console.log(listing);
+    useEffect(() => {
+        const fetchListing = async () => {
+                const listingId=params.listingId;
+                try {
+                    const res = await fetch(`/api/listing/get/${listingId}`, {
+                        method: 'GET',
+                    });
+                    if (!res.ok) {
+                        const errorText = await res.text();
+                        throw new Error(errorText || 'Failed to fetch listing');
+                    }
+                    const data = await res.json();
+                    setFormData(data);
+                } catch (error) {
+                    console.error(error);
+                    setError(error.message);
+        }
+    };
+        fetchListing();
+    }, []);
     const handleImageSubmit = (e) => {
         if (files.length === 0) {
             setimageuploaderror('Please select at least one image to upload.');
@@ -97,13 +120,14 @@ function Createlisting() {
     };
     // console.log(formData);
     const handleSubmit = async (e) => {
+        const listingId=params.listingId;
         e.preventDefault();
         try {
             if(formData.imageUrls.length===0){return setError('Please upload at least one image');}
             if(formData.regularPrice<formData.discountedPrice){return setError('Discounted price should be less than regular price');}
             setLoading(true);
             setError('');
-            const res = await fetch('/api/listing/create', {
+            const res = await fetch(`/api/listing/update/${listingId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -122,7 +146,7 @@ function Createlisting() {
             setListing(data);
             
             setLoading(false);
-            navigate(`/listing/${data._id}`);
+            navigate(`/mylisting`);
             if (data.success === false) {
                 setError(data.message);
                 return;
@@ -135,7 +159,7 @@ function Createlisting() {
     }
     return (
         <main className='p-5 max-w-4xl mx-auto'>
-            <h1 className='text-3xl font-semibold text-center my-8'>Create a Listing</h1>
+            <h1 className='text-3xl font-semibold text-center my-8'>Update a Listing</h1>
             <form onSubmit={handleSubmit} className='flex flex-col space-y-6 sm:flex-row sm:space-x-6 sm:space-y-0 gap-6'>
                 <div className="flex flex-col gap-6 flex-1">
                     <input type="text" placeholder='Name' id='name' name='name' className='border p-4 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-400' maxLength={62} minLength={10} required onChange={handleChange} value={formData.name} />
@@ -243,7 +267,7 @@ function Createlisting() {
                         disabled={loading || uploading}
                         type='submit'  // Changed from 'button' to 'submit'
                         className='p-4 bg-slate-700 text-white rounded-lg uppercase hover:opacity-90 disabled:opacity-80'>
-                        {loading ? 'Creating...' : 'Create Listing'}
+                        {loading ? 'Updating...' : 'Update Listing'}
                     </button>
                 </div>
                 {error && <p className='text-red-600 text-sm items-center'>{error}</p>}
@@ -254,5 +278,4 @@ function Createlisting() {
         </main>
     );
 }
-
-export default Createlisting;
+export default UpdateListing;

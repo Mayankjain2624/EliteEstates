@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 function Mylisting() {
   const { currentUser } = useSelector((state) => state.user);
   const [Listings, setListings] = useState([]);
@@ -79,12 +80,14 @@ function Mylisting() {
               </div>
               <p className="text-gray-500 text-sm mb-4">Location: {listing.address}</p>
               <div className="flex justify-between space-x-2">
+                <Link to={`/updatelisting/${listing._id}`}>
                 <button 
                   className="flex-1 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
                   onClick={()=>editlisting(listing._id)}
                 >
                   Edit
                 </button>
+                </Link>
                 <button 
                   className="flex-1 py-2 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75"
                   onClick={()=>deleteListing(listing._id)}
