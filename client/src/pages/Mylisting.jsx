@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 function Mylisting() {
@@ -27,7 +27,7 @@ function Mylisting() {
   }
   useEffect(() => {
     showlisting();
-  }, []);
+  }, [currentUser._id]);
   const deleteListing = async (listingId) => {
       try {
         const res = await fetch(`/api/listing/delete/${listingId}`, {

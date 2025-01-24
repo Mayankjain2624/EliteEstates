@@ -16,7 +16,7 @@ import {
   FaShare,
 } from 'react-icons/fa';
 
-// import Contact from '../components/Contact';
+import Contact from '../components/Contact';
 export default function Listing() {
   const params = useParams();
   const [listing, setListing] = useState(null);
@@ -65,7 +65,7 @@ export default function Listing() {
             {listing.imageUrls.map((url,index) => (
               <SwiperSlide key={index}>
                 <div
-                  className='h-[550px] w-[800px] mx-auto'
+                  className='h-[550px] w-[600px] mx-auto'
                   style={{
                     background: `url(${url}) center no-repeat`,
                     backgroundSize: 'cover',
