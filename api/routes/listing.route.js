@@ -1,12 +1,17 @@
 import express from  'express'
 import { createListing,deleteListing,updateListing,getListing,getListings } from '../controllers/listing.controller.js';
-import { verifyToken } from '../utils/VerifyUser.js';
+import { verifyToken, authorizeRoles } from '../utils/VerifyUser.js';
 const router=express.Router();
 
-router.post('/create',verifyToken,createListing);
-router.delete('/delete/:id',verifyToken,deleteListing);
-router.post('/update/:id',verifyToken,updateListing);
-router.get('/get/:id',verifyToken,getListing);
-router.get('/get',verifyToken,getListings);
+// Only owners and admins can create listings
+router.post('/create', verifyToken, authorizeRoles('owner', 'admin'), createListing);
+
+// Only owners can delete/update their own listings, admins can delete/update any
+router.delete('/delete/:id', verifyToken, authorizeRoles('owner', 'admin'), deleteListing);
+router.post('/update/:id', verifyToken, authorizeRoles('owner', 'admin'), updateListing);
+
+// Anyone can view listings
+router.get('/get/:id', getListing);
+router.get('/get', getListings);
 
 export default router;

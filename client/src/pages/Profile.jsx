@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   updateUserFailure,
@@ -14,21 +14,14 @@ import { Link } from "react-router-dom";
 function Profile() {
   const dispatch = useDispatch();
   const fileRef = useRef(null);
-  const { currentUser, loading, error } = useSelector((state) => state.user);
+  const { currentUser, loading } = useSelector((state) => state.user);
   const [file, setFile] = useState(undefined);
   const [iloading, setIloading] = useState(false);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({});
 
-  useEffect(() => {
-    if (file) {
-      setIloading(true);
-      handleFileUpload(file);
-    }
-  }, [file]);
-
-  const handleFileUpload = async (file) => {
+  const handleFileUpload = useCallback(async (file) => {
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "first_try");
@@ -44,7 +37,14 @@ function Profile() {
     setIloading(false);
     setImage(uploadedImage.url);
     setFormData({ ...formData, avatar: uploadedImage.url });
-  };
+  }, [formData]);
+
+  useEffect(() => {
+    if (file) {
+      setIloading(true);
+      handleFileUpload(file);
+    }
+  }, [file, handleFileUpload]);
 
   const handleChange = (e) => {
     setFormData({
@@ -159,13 +159,44 @@ function Profile() {
           id="password"
           onChange={handleChange}
         />
+        
+        {/* Role Display */}
+        <div className="bg-gray-50 p-3 rounded-md border">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Account Type
+          </label>
+          <div className="flex items-center justify-between">
+            <span className="capitalize font-semibold text-gray-800">
+              {currentUser.role}
+            </span>
+            <span className={`px-2 py-1 rounded text-xs font-medium ${
+              currentUser.role === 'admin' ? 'bg-red-100 text-red-800' :
+              currentUser.role === 'owner' ? 'bg-blue-100 text-blue-800' :
+              'bg-gray-100 text-gray-800'
+            }`}>
+              {currentUser.role === 'admin' ? 'Full Access' :
+               currentUser.role === 'owner' ? 'Can Create Listings' :
+               'Browse Only'}
+            </span>
+          </div>
+        </div>
+        
         <button
           disabled={loading}
           className="bg-blue-600 text-white rounded-md py-2 uppercase hover:bg-blue-700 disabled:bg-blue-400 transition duration-200"
         >
           {loading ? "Updating..." : "Update"}
         </button>
-        <Link to={"/createlisting"} className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-80">create listing</Link>
+        
+        {/* Conditional Links based on role */}
+        {(currentUser.role === 'owner' || currentUser.role === 'admin') && (
+          <Link 
+            to={"/createlisting"} 
+            className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-80"
+          >
+            create listing
+          </Link>
+        )}
       </form>
 
       {updateSuccess && (

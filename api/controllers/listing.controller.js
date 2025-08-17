@@ -15,7 +15,8 @@ export const deleteListing = async (req, res, next) => {
     return next(errorHandler(404, 'Listing not found!'));
   }
 
-  if (req.user.id !== listing.useRef) {
+  // Admin can delete any listing, owners can only delete their own
+  if (req.user.role !== 'admin' && req.user._id.toString() !== listing.useRef) {
     return next(errorHandler(401, 'You can only delete your own listings!'));
   }
 
@@ -28,12 +29,16 @@ export const deleteListing = async (req, res, next) => {
 };
 export const updateListing = async (req, res, next) => {
   const listing = await Listing.findById(req.params.id);
-  if (req.user.id !== listing.useRef) {
-    return next(errorHandler(401, 'You can only update your own listings!'));
-  }
+  
   if (!listing) {
     return next(errorHandler(404, 'Listing not found!'));
   }
+  
+  // Admin can update any listing, owners can only update their own
+  if (req.user.role !== 'admin' && req.user._id.toString() !== listing.useRef) {
+    return next(errorHandler(401, 'You can only update your own listings!'));
+  }
+  
   try {
     const updatedlisting = await Listing.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
     res.status(200).json(updatedlisting);

@@ -34,7 +34,7 @@ function Header() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-600 to-slate-900">
               Mayank
             </span>
-            <span className="text-slate-700">Estate</span>
+            <span className="text-red-700">Estate</span>
           </Link>
         </h1>
         {/* Search Bar */}
@@ -65,18 +65,46 @@ function Header() {
               About
             </li>
           </Link>
-          <Link to="/mylisting">
-            <li className="hidden sm:block text-gray-700 font-medium hover:text-blue-500 transition duration-200">
-              My Listing
-            </li>
-          </Link>
+          
+          {/* Show "My Listing" only for owners and admins */}
+          {currentUser && (currentUser.role === 'owner' || currentUser.role === 'admin') && (
+            <Link to="/mylisting">
+              <li className="hidden sm:block text-gray-700 font-medium hover:text-blue-500 transition duration-200">
+                My Listing
+              </li>
+            </Link>
+          )}
+          
+          {/* Show "Create Listing" only for owners and admins */}
+          {currentUser && (currentUser.role === 'owner' || currentUser.role === 'admin') && (
+            <Link to="/create-listing">
+              <li className="hidden sm:block text-gray-700 font-medium hover:text-blue-500 transition duration-200">
+                Create Listing
+              </li>
+            </Link>
+          )}
+          
+          {/* Show "Admin Panel" only for admins */}
+          {currentUser && currentUser.role === 'admin' && (
+            <Link to="/admin">
+              <li className="hidden sm:block text-gray-700 font-medium hover:text-blue-500 transition duration-200">
+                Admin Panel
+              </li>
+            </Link>
+          )}
+          
           <Link to="/profile">
             {currentUser ? (
-              <img
-                className="rounded-full h-8 w-8 object-cover border-2 border-gray-300 hover:border-blue-500 transition duration-200"
-                src={currentUser.avatar}
-                alt="Profile"
-              />
+              <div className="flex items-center gap-2">
+                <span className="hidden sm:block text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded capitalize">
+                  {currentUser.role}
+                </span>
+                <img
+                  className="rounded-full h-8 w-8 object-cover border-2 border-gray-300 hover:border-blue-500 transition duration-200"
+                  src={currentUser.avatar}
+                  alt="Profile"
+                />
+              </div>
             ) : (
               <li className="text-gray-700 font-medium hover:text-blue-500 transition duration-200">
                 Sign In

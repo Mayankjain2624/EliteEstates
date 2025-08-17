@@ -64,6 +64,24 @@ export default function SignUp() {
           id='password'
           onChange={handleChange}
         />
+        
+        <select
+          className='border p-3 rounded-lg'
+          id='role'
+          onChange={handleChange}
+          defaultValue='user'
+        >
+          <option value='user'>User (Browse listings)</option>
+          <option value='owner'>Property Owner (Create listings)</option>
+        </select>
+        
+        <input
+          type='tel'
+          placeholder='phone (optional)'
+          className='border p-3 rounded-lg'
+          id='phone'
+          onChange={handleChange}
+        />
 
         <button
           disabled={loading}

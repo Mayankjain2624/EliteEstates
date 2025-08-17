@@ -12,6 +12,8 @@ import Mylisting from './pages/Mylisting';
 import UpdateListing from './pages/UpdateListing';
 import Listing from './pages/Listing';
 import Search from './pages/Search';
+import AdminPanel from './pages/AdminPanel';
+
 function App() {
   return (
     <BrowserRouter>
@@ -26,9 +28,11 @@ function App() {
       
           <Route element={<PrivateRoute/>}>
         <Route path="/profile" element={<Profile />} />
+        <Route path="/create-listing" element={<Createlisting />} />
         <Route path="/createlisting" element={<Createlisting />} />
         <Route path="/mylisting" element={<Mylisting />} />
         <Route path="/updatelisting/:listingId" element={<UpdateListing/>} />
+        <Route path="/admin" element={<AdminPanel />} />
           </Route>
       </Routes>
     </BrowserRouter>
