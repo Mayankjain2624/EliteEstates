@@ -48,8 +48,8 @@ export default function Footer() {
 
   const support = [
     { name: 'Help Center', href: '/help' },
-    { name: 'Contact Support', href: '/support' },
-    { name: 'FAQ', href: '/faq' },
+    { name: 'Contact Support', href: '/help' },
+    { name: 'FAQ', href: '/help' },
     { name: 'Live Chat', href: '/chat' },
     { name: 'Documentation', href: '/docs' },
     { name: 'Community', href: '/community' }
@@ -76,35 +76,35 @@ export default function Footer() {
               </div>
               <div>
                 <h2 className="text-2xl font-black">
-                  <span className="text-white">Elite</span>
-                  <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"> Estates</span>
+                  <span className="text-white">Mayank</span>
+                  <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"> Estate</span>
                 </h2>
-                <p className="text-xs text-gray-400 uppercase tracking-wider">Luxury Real Estate</p>
+                <p className="text-xs text-gray-400 uppercase tracking-wider">Premium Real Estate</p>
               </div>
             </div>
             
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Your premier destination for luxury real estate. We connect discerning buyers with exceptional properties, 
-              offering unparalleled service and expertise in the world&apos;s most desirable locations.
+              Your trusted partner in real estate. We connect property seekers with their perfect homes, 
+              offering exceptional service and expertise in prime locations across India.
             </p>
 
             {/* Contact Info */}
             <div className="space-y-3 mb-6">
               <div className="flex items-center space-x-3 text-sm text-gray-300">
                 <FaMapMarkerAlt className="text-blue-400 flex-shrink-0" />
-                <span>123 Luxury Avenue, Elite District, NY 10001</span>
+                <span>Jabalpur, Madhya Pradesh, India</span>
               </div>
               <div className="flex items-center space-x-3 text-sm text-gray-300">
                 <FaPhone className="text-blue-400 flex-shrink-0" />
-                <span>+1 (555) 123-4567</span>
+                <span>+91 9876543210</span>
               </div>
               <div className="flex items-center space-x-3 text-sm text-gray-300">
                 <FaEnvelope className="text-blue-400 flex-shrink-0" />
-                <span>info@eliteestates.com</span>
+                <span>mayankjain2624@gmail.com</span>
               </div>
               <div className="flex items-center space-x-3 text-sm text-gray-300">
                 <FaWhatsapp className="text-green-400 flex-shrink-0" />
-                <span>WhatsApp: +1 (555) 987-6543</span>
+                <span>WhatsApp: +91 9876543210</span>
               </div>
             </div>
 
@@ -255,7 +255,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-center md:text-left">
               <p className="text-gray-400 text-sm">
-                © {currentYear} Elite Estates. All rights reserved. | Crafted with ❤️ for luxury real estate.
+                © {currentYear} Mayank Estate. All rights reserved. | Crafted with ❤️ for luxury real estate.
               </p>
             </div>
             
@@ -274,7 +274,7 @@ export default function Footer() {
           
           <div className="mt-4 pt-4 border-t border-gray-800/50 text-center">
             <p className="text-xs text-gray-500">
-              Elite Estates is a licensed real estate brokerage. Equal Housing Opportunity. All information deemed reliable but not guaranteed.
+              Mayank Estate is a licensed real estate brokerage. Equal Housing Opportunity. All information deemed reliable but not guaranteed.
             </p>
           </div>
         </div>
