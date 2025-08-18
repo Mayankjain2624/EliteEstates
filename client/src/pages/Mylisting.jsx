@@ -1,6 +1,7 @@
 import  { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import ViewCounter from '../components/ViewCounter';
 function Mylisting() {
   const { currentUser } = useSelector((state) => state.user);
   const [Listings, setListings] = useState([]);
@@ -80,6 +81,12 @@ function Mylisting() {
                 )}
               </div>
               <p className="text-gray-500 text-sm mb-4">Location: {listing.address}</p>
+              
+              {/* View Counter */}
+              <div className="mb-4">
+                <ViewCounter listingId={listing._id} size="small" />
+              </div>
+              
               <div className="flex justify-between space-x-2">
                 <Link to={`/updatelisting/${listing._id}`}>
                 <button 

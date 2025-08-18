@@ -216,7 +216,7 @@ export default function AdminPanel() {
               <div key={listing._id} className="border rounded-lg p-4 flex justify-between items-center">
                 <div className="flex items-center gap-4">
                   <img
-                    src={listing.imageUrls?.[0] || '/default-house.jpg'}
+                    src={listing.imageUrls?.[0] || '/default-house.svg'}
                     alt={listing.name}
                     className="w-16 h-16 object-cover rounded"
                   />

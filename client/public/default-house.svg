@@ -1,0 +1,10 @@
+<!-- Default House Image SVG -->
+<svg width="300" height="200" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="200" fill="#F3F4F6"/>
+  <path d="M75 80L150 30L225 80V160H75V80Z" fill="#E5E7EB"/>
+  <rect x="90" y="120" width="30" height="40" fill="#9CA3AF"/>
+  <rect x="180" y="120" width="30" height="40" fill="#9CA3AF"/>
+  <rect x="130" y="140" width="15" height="20" fill="#6B7280"/>
+  <circle cx="137" cy="150" r="2" fill="#374151"/>
+  <text x="150" y="190" text-anchor="middle" fill="#9CA3AF" font-family="Arial" font-size="12">No Image Available</text>
+</svg>

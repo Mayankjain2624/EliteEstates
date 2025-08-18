@@ -9,6 +9,7 @@ import {
     getAllListings, 
     updateUserRole 
 } from '../controllers/user.controller.js';
+import { deleteListing } from '../controllers/listing.controller.js';
 import { verifyToken, authorizeRoles, authorizeOwnerOrAdmin } from '../utils/VerifyUser.js';
 
 const router=express.Router();
@@ -25,5 +26,7 @@ router.get('/:id', verifyToken, getUser)
 router.get('/admin/users', verifyToken, authorizeRoles('admin'), getAllUsers);
 router.get('/admin/listings', verifyToken, authorizeRoles('admin'), getAllListings);
 router.put('/admin/users/:id/role', verifyToken, authorizeRoles('admin'), updateUserRole);
+router.delete('/admin/users/:id', verifyToken, authorizeRoles('admin'), deleteUser);
+router.delete('/admin/listings/:id', verifyToken, authorizeRoles('admin'), deleteListing);
 
 export default router;

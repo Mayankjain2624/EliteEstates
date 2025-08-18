@@ -1,11 +1,30 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default function Contact({listing}) {
   const [landlord, setLandlord] = useState(null);
   const [message, setMessage] = useState('');
+  
   const onChange = (e) => {
     setMessage(e.target.value);
+  };
+
+  const handleSendMessage = async () => {
+    // Track inquiry analytics
+    try {
+      await fetch(`/api/analytics/inquiry/${listing._id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          inquiryType: 'contact',
+        }),
+      });
+    } catch (error) {
+      console.log('Analytics tracking error:', error);
+    }
   };
 
   useEffect(() => {
@@ -41,8 +60,9 @@ export default function Contact({listing}) {
           ></textarea>
 
           <Link
-          to={`mailto:${landlord.email}?subject=Regarding ${listing.name}&body=${message}`}
-          className='bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95'
+            to={`mailto:${landlord.email}?subject=Regarding ${listing.name}&body=${message}`}
+            onClick={handleSendMessage}
+            className='bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95'
           >
             Send Message          
           </Link>
@@ -51,3 +71,12 @@ export default function Contact({listing}) {
     </>
   );
 }
+
+Contact.propTypes = {
+  listing: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    useRef: PropTypes.string.isRequired,
+  }).isRequired,
+};
