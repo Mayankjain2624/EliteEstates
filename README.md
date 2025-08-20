@@ -287,7 +287,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Mayank Jain**
 - GitHub: [@Mayankjain2624](https://github.com/Mayankjain2624)
-- Email: mayank.jain@example.com
+- Email: mayankjain2624@gmail.com
 
 ## 🙏 Acknowledgments
 
