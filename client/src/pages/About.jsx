@@ -93,7 +93,7 @@ function About() {
             <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 mb-6">
               About{" "}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Mayank Estate
+                Elite Estates
               </span>
             </h1>
             <p className="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
@@ -144,7 +144,7 @@ function About() {
               </span>
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed mb-6">
-              Founded with a vision to democratize real estate, Mayank Estate emerged from the simple belief 
+              Founded with a vision to democratize real estate, Elite Estates emerged from the simple belief 
               that finding your perfect property shouldn&apos;t be complicated, stressful, or uncertain.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed mb-8">
@@ -193,7 +193,7 @@ function About() {
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
               Why Choose{" "}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Mayank Estate?
+                Elite Estates?
               </span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -262,7 +262,7 @@ function About() {
             Ready to Find Your Dream Property?
           </h2>
           <p className="text-xl text-blue-100 mb-8">
-            Join thousands of satisfied customers who found their perfect home with Mayank Estate.
+            Join thousands of satisfied customers who found their perfect home with Elite Estates.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center space-x-2">

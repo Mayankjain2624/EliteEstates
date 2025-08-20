@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes,useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
@@ -21,10 +21,24 @@ import AdminPanel from './pages/AdminPanel';
 import AnalyticsDashboard from './pages/AnalyticsDashboard';
 import MyTours from './pages/MyTours';
 import ToursDashboard from './pages/ToursDashboard';
-
+import { useEffect } from 'react';
+function ScrollToTop() {
+  const {pathname} = useLocation();
+  useEffect(()=>{
+    window.scrollTo(
+      {
+        left: 0,
+        top: 0,
+        behavior: 'smooth'
+      }
+    );
+  },[pathname]);
+  return null;
+}
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />

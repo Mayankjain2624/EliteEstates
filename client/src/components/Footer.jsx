@@ -255,7 +255,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-center md:text-left">
               <p className="text-gray-400 text-sm">
-                © {currentYear} Mayank Estate. All rights reserved. | Crafted with ❤️ for luxury real estate.
+                © {currentYear} Elite Estates. All rights reserved. | Crafted with ❤️ for luxury real estate.
               </p>
             </div>
             
@@ -274,7 +274,7 @@ export default function Footer() {
           
           <div className="mt-4 pt-4 border-t border-gray-800/50 text-center">
             <p className="text-xs text-gray-500">
-              Mayank Estate is a licensed real estate brokerage. Equal Housing Opportunity. All information deemed reliable but not guaranteed.
+              Elite Estates is a licensed real estate brokerage. Equal Housing Opportunity. All information deemed reliable but not guaranteed.
             </p>
           </div>
         </div>

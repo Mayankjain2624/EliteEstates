@@ -132,7 +132,7 @@ function Privacy() {
         <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/50 p-8 mb-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Introduction</h2>
           <p className="text-gray-600 leading-relaxed mb-4">
-            At Mayank Estate, we are committed to protecting your privacy and ensuring the security of your personal information. 
+            At Elite Estates, we are committed to protecting your privacy and ensuring the security of your personal information. 
             This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our real estate platform.
           </p>
           <p className="text-gray-600 leading-relaxed">

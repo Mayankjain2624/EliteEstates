@@ -9,7 +9,13 @@ import tourBookingRouter from './routes/tourBooking.route.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
 import path from 'path';
-dotenv.config({ path: '../.env' });
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.join(__dirname, '../.env') });
+
+console.log('MongoDB URI:', process.env.MONGO_STRING ? 'Found' : 'Not found');
 
 mongoose
   .connect(process.env.MONGO_STRING)
@@ -19,7 +25,6 @@ mongoose
   .catch((err) => {
     console.error("Error connecting to MongoDB:", err);
   });
-const __dirname = path.resolve();
 const app = express();
 // const cors=require('cors');
 app.use(cors({

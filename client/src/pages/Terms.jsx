@@ -6,7 +6,7 @@ function Terms() {
       id: 'acceptance',
       title: 'Acceptance of Terms',
       content: [
-        'By accessing and using Mayank Estate, you accept and agree to be bound by these Terms of Service.',
+        'By accessing and using Elite Estates, you accept and agree to be bound by these Terms of Service.',
         'If you do not agree to these terms, please do not use our platform.',
         'These terms apply to all users, including property owners, buyers, renters, and visitors.',
         'We reserve the right to modify these terms at any time with notice to users.'
@@ -51,7 +51,7 @@ function Terms() {
       id: 'transactions',
       title: 'Transactions and Payments',
       content: [
-        'Mayank Estate facilitates connections but is not a party to any property transactions.',
+        'Elite Estates facilitates connections but is not a party to any property transactions.',
         'All financial transactions are between the buyer/renter and property owner.',
         'We are not responsible for the completion of any property transactions.',
         'Payment processing is handled by secure third-party providers.',
@@ -132,7 +132,7 @@ function Terms() {
             <div>
               <h3 className="text-lg font-bold text-amber-800 mb-2">Important Notice</h3>
               <p className="text-amber-700">
-                These terms constitute a legally binding agreement between you and Mayank Estate. 
+                These terms constitute a legally binding agreement between you and Elite Estates. 
                 By using our platform, you acknowledge that you have read, understood, and agree to be bound by these terms.
               </p>
             </div>
@@ -147,7 +147,7 @@ function Terms() {
         <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/50 p-8 mb-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Introduction</h2>
           <p className="text-gray-600 leading-relaxed mb-4">
-            Welcome to Mayank Estate, a comprehensive real estate platform that connects property buyers, sellers, and renters. 
+            Welcome to Elite Estates, a comprehensive real estate platform that connects property buyers, sellers, and renters. 
             These Terms of Service (&quot;Terms&quot;) govern your use of our website, mobile application, and related services.
           </p>
           <p className="text-gray-600 leading-relaxed">
